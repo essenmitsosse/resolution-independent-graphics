@@ -1,0 +1,28 @@
+{
+  "name": "resolution-independet-illustrations",
+  "version": "0.0.1",
+  "description": "A tool to read resolution-independet-illustration-files and output them to a HTML5 canvas.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/essenmitsosse/resolution-independent-illustrations.git"
+  },
+  "keywords": [
+    "illustration",
+    "resolution",
+    "independent",
+    "responsive",
+    "pixel",
+    "canvas",
+    "vanilla"
+  ],
+  "author": "Marcus Blättermann",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/essenmitsosse/resolution-independent-illustrations/issues"
+  },
+  "homepage": "https://github.com/essenmitsosse/resolution-independent-illustrations"
+}
