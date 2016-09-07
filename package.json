@@ -22,7 +22,7 @@
 		"canvas",
 		"vanilla"
 	],
-	"author": "Marcus Blättermann",
+	"author": "Marcus Blättermann <marcus@essenmitsosse.de> (http://essenmitsosse.de)",
 	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/essenmitsosse/resolution-independent-illustrations/issues"
