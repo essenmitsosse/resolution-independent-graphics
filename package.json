@@ -1,7 +1,8 @@
 {
-	"name": "resolution-independet-illustrations",
+	"name": "resolution-independent-illustrations",
+	"title": "Resoultion Independent Illustrations",
 	"version": "0.0.1",
-	"description": "A tool to read resolution-independet-illustration-files and output them to a HTML5 canvas.",
+	"description": "A tool to read resolution-independent-illustration-files and output them to a HTML5 canvas.",
 	"devDependencies": {
 		"grunt": "~1.0.0"
 	},
@@ -20,9 +21,15 @@
 		"responsive",
 		"pixel",
 		"canvas",
-		"vanilla"
+		"vanilla",
+		"javascript",
+		"browser",
+		"library"
 	],
-	"author": "Marcus Blättermann <marcus@essenmitsosse.de> (http://essenmitsosse.de)",
+	"author": {
+		"name": "Marcus Blättermann",
+		"url": "(http://essenmitsosse.de)"
+	},
 	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/essenmitsosse/resolution-independent-illustrations/issues"
