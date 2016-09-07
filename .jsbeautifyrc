@@ -1,0 +1,76 @@
+{
+	"js": {
+		"beautify_on_save": true,
+		"break_chained_methods": true,
+		"end_with_comma": true,
+		"end_with_newline": true,
+		"indent_with_tabs": true,
+		"jslint_happy": true,
+		"keep_array_indentation": false,
+		"keep_function_indentation": false,
+		"max_preserve_newlines": 2,
+		"space_after_anon_function": true,
+		"space_in_paren": true,
+		"unescape_strings": true
+	},
+	"scss": {
+		"align_assignments": true,
+		"beautify_on_save": true,
+		"convert_quotes": "single",
+		"force_indentation": true,
+		"newline_between_rules": true,
+		"no_lead_zero": true,
+		"preserve_newlines": true
+	},
+	"html": {
+		"beautify_on_save": true,
+		"end_with_newline": true,
+		"max_preserve_newlines": 2,
+		"extra_liners": [
+			"head",
+			"body",
+			"/html",
+			"a"
+		],
+		"unformatted": [
+			"a",
+			"span",
+			"bdo",
+			"em",
+			"strong",
+			"dfn",
+			"code",
+			"samp",
+			"kbd",
+			"var",
+			"cite",
+			"abbr",
+			"acronym",
+			"q",
+			"sub",
+			"sup",
+			"tt",
+			"i",
+			"b",
+			"big",
+			"small",
+			"u",
+			"s",
+			"strike",
+			"font",
+			"ins",
+			"del",
+			"pre",
+			"address",
+			"dt",
+			"h1",
+			"h2",
+			"h3",
+			"h4",
+			"h5",
+			"h6"
+		],
+		"wrap_line_length": 0
+	}
+
+}
