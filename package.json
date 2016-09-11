@@ -1,20 +1,28 @@
 {
-	"name": "resolution-independent-illustrations",
-	"title": "Resoultion Independent Illustrations",
+	"name": "RIG",
+	"title": "Resoultion Independent Graphics",
 	"version": "0.0.1",
-	"description": "A tool to read resolution-independent-illustration-files and output them to a HTML5 canvas.",
+	"description": "A tool to read RIG-files and output them to a HTML5 canvas.",
 	"devDependencies": {
-		"grunt": "~1.0.0"
+		"amdclean": "2.7.0",
+		"grunt": "~0.4.5",
+		"grunt-contrib-clean": "1.0.0",
+		"grunt-contrib-requirejs": "1.0.0",
+		"grunt-contrib-watch": "1.0.0",
+		"grunt-contrib-jasmine": "1.0.3",
+		"grunt-template-jasmine-requirejs": "0.2.3",
+		"matchdep": "1.0.1",
+		"requirejs": "2.3.1"
 	},
-	"main": "index.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
+	"main": "src/config.js",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/essenmitsosse/resolution-independent-illustrations.git"
+		"url": "https://github.com/essenmitsosse/resolution-independent-graphics.git"
 	},
 	"keywords": [
+		"image",
+		"graphic",
+		"graphics",
 		"illustration",
 		"resolution",
 		"independent",
@@ -32,7 +40,7 @@
 	},
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/essenmitsosse/resolution-independent-illustrations/issues"
+		"url": "https://github.com/essenmitsosse/resolution-independent-graphics/issues"
 	},
-	"homepage": "https://github.com/essenmitsosse/resolution-independent-illustrations"
+	"homepage": "https://github.com/essenmitsosse/resolution-independent-graphics"
 }
