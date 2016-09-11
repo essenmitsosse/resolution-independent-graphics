@@ -1,4 +1,5 @@
 {
+
 	"name": "RIG",
 	"title": "Resoultion Independent Graphics",
 	"version": "0.0.1",
@@ -43,4 +44,3 @@
 		"url": "https://github.com/essenmitsosse/resolution-independent-graphics/issues"
 	},
 	"homepage": "https://github.com/essenmitsosse/resolution-independent-graphics"
-}
