@@ -1,4 +1,4 @@
-# Resolution Independent Graphics
+# Resolution Independent Graphics [![Built with Grunt](https://cdn.gruntjs.com/builtwith.svg)](http://gruntjs.com/)
 
 This vanilla javascript framework will alow to read files in a special format for Resolution Independet Graphics (RIG) and output them to a HTML5 canvas, so that their size can dynamically be changed (e.g. to adopt to differnt screen sizes).
 

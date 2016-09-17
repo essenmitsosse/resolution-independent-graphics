@@ -67,7 +67,7 @@
 	"couch": false, // CouchDB
 	"devel": true, // Development/debugging (alert, confirm, etc)
 	"dojo": false, // Dojo Toolkit
-	"jasmine": false, // Jasmine
+	"jasmine": false,
 	"jquery": true, // jQuery
 	"mocha": true, // Mocha
 	"mootools": false, // MooTools
@@ -85,10 +85,19 @@
 
 	// Custom Globals
 	"globals": {
-		"require": true, // RequireJS
-		"define": true, // RequireJS
-		"notify": true, // RequireJS
-		"requirejs": true, // RequireJS
-		"jasmine": true
+		// RequireJS
+		"require": true,
+		"define": true,
+		"notify": true,
+		"requirejs": true,
+
+		// Jasmine
+		"jasmine": true,
+		"expect": true,
+		"beforeAll": true,
+		"beforeEach": true,
+		"afterEach": true,
+		"afterAll": true,
+		"spyOn": true
 	} // additional predefined global variables
 }
