@@ -82,10 +82,6 @@ module.exports = function ( grunt ) {
 			}
 		},
 
-		scripts: {
-			test: "grunt travis --verbose"
-		},
-
 		watch: {
 			options: {
 				spawn: false,
