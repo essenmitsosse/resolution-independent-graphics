@@ -82,6 +82,10 @@ module.exports = function ( grunt ) {
 			}
 		},
 
+		scripts: {
+			test: "grunt travis --verbose"
+		},
+
 		watch: {
 			options: {
 				spawn: false,
@@ -96,5 +100,6 @@ module.exports = function ( grunt ) {
 
 	grunt.registerTask( "default", [ "clean", "requirejs" ] );
 	grunt.registerTask( "dev", [ "default", "watch" ] );
+	grunt.registerTask( "travis", [ "default", "jasmine" ] );
 
 };
