@@ -1,30 +1,35 @@
 define( [], function () {
 	"use strict";
 
-	function errorHandlerWithDomain( domainName, errorHandler ) {
-		// Copy original errorHandler object.
-		var errorHandlerWithDomain = Object.create( errorHandler );
+	var ErrorHandlerWithDomain;
 
-		errorHandlerWithDomain.addError = function ( error ) {
-			errorHandler.addError( error, domainName );
+	function prepareErrorHandlerWithDomain( errorHandler ) {
+		function ErrorHandlerWithDomain( domainName ) {
+			this.domainName = domainName;
+		}
+
+		ErrorHandlerWithDomain.prototype = Object.create( errorHandler );
+
+		ErrorHandlerWithDomain.prototype.addError = function ( error ) {
+			errorHandler.addError( error, this.domainName );
 		};
 
-		errorHandlerWithDomain.addTypeError = function ( warning ) {
-			errorHandler.addTypeError( warning, domainName );
+		ErrorHandlerWithDomain.prototype.addTypeError = function ( typeError ) {
+			errorHandler.addTypeError( typeError, this.domainName );
 		};
 
-		errorHandlerWithDomain.addRangeError = function ( error ) {
-			errorHandler.addRangeError( error, domainName );
+		ErrorHandlerWithDomain.prototype.addRangeError = function ( rangeError ) {
+			errorHandler.addRangeError( rangeError, this.domainName );
 		};
 
-		errorHandlerWithDomain.addWarning = function ( warning ) {
-			errorHandler.addWarning( warning, domainName );
+		ErrorHandlerWithDomain.prototype.addWarning = function ( warning ) {
+			errorHandler.addWarning( warning, this.domainName );
 		};
 
-		return errorHandlerWithDomain;
+		return ErrorHandlerWithDomain;
 	}
 
-	var errorHandler = ( function ( errorHandlerWithDomain ) {
+	var errorHandler = ( function () {
 		var isSilenced = false,
 			self = {};
 
@@ -46,12 +51,12 @@ define( [], function () {
 			addError( error, domainName, Error );
 		};
 
-		self.addTypeError = function ( error, domainName ) {
-			addError( error, domainName, TypeError );
+		self.addTypeError = function ( typeError, domainName ) {
+			addError( typeError, domainName, TypeError );
 		};
 
-		self.addRangeError = function ( error, domainName ) {
-			addError( error, domainName, RangeError );
+		self.addRangeError = function ( rangeError, domainName ) {
+			addError( rangeError, domainName, RangeError );
 		};
 
 		/** Zip up the jacket. */
@@ -75,14 +80,16 @@ define( [], function () {
 
 		self.getNewErrorHandler = function ( domainName ) {
 			if ( typeof domainName === "string" && domainName.length > 0 ) {
-				return errorHandlerWithDomain( domainName, self );
+				return new ErrorHandlerWithDomain( domainName, self );
 			} else {
 				return self;
 			}
 		};
 
 		return self;
-	} )( errorHandlerWithDomain );
+	} )();
+
+	ErrorHandlerWithDomain = prepareErrorHandlerWithDomain( errorHandler );
 
 	return errorHandler;
 } );
