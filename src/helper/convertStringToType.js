@@ -24,18 +24,18 @@ define( [
 		}
 
 		if ( typeof targetType !== "string" ) {
-			errorHandler.addError( "Target Type has to be a string. It was " + ( typeof targetType ) );
+			errorHandler.addTypeError( "Target Type has to be a string. It was " + ( typeof targetType ) );
 		}
 
 		if ( typeof value !== "string" ) {
-			errorHandler.addError( "Input value has to be a string. It was " + ( typeof value ) + "." );
+			errorHandler.addTypeError( "Input value has to be a string. It was " + ( typeof value ) + "." );
 		}
 
 		switch ( targetType ) {
 		case "number":
 			result = parseInt( value );
 			if ( isNaN( result ) ) {
-				errorHandler.addError( "'" + value + "' can’t be converted into a number." );
+				errorHandler.addTypeError( "'" + value + "' can’t be converted into a number." );
 			}
 			break;
 		case "boolean":
@@ -46,11 +46,11 @@ define( [
 			} else if ( value === "0" || value === "false" ) {
 				result = false;
 			} else {
-				errorHandler.addError( "'" + value + "' can’t be converted into a boolean." );
+				errorHandler.addTypeError( "'" + value + "' can’t be converted into a boolean." );
 			}
 			break;
 		default:
-			errorHandler.addError( "'" + targetType + "' is no supported type to be converted into" );
+			errorHandler.addTypeError( "'" + targetType + "' is no supported type to be converted into" );
 		}
 
 		return result;

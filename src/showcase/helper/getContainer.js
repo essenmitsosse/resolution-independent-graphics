@@ -21,7 +21,7 @@ define( [
 
 			// if the container id is something else then a string, throw an error
 		} else if ( typeof containerid !== "string" ) {
-			errorHandler.addError( "Containerid needs to be a string. Given id: " + containerid + " (" + ( typeof containerid ) + ")" );
+			errorHandler.addTypeError( "Containerid needs to be a string. Given id: " + containerid + " (" + ( typeof containerid ) + ")" );
 
 			// we can now assum the container id must be a string, with more then one character
 		} else {

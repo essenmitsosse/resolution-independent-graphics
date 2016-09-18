@@ -21,11 +21,11 @@ define( [
 
 		// throw error if Object is an Array
 		if ( typeof objectToCopyFrom !== "object" ) {
-			errorHandler.addError( "An element in the list wasn’t an object. It was a " + ( typeof objectToCopyFrom ) );
+			errorHandler.addTypeError( "An element in the list wasn’t an Object. It was a " + ( typeof objectToCopyFrom ) );
 			return {};
 		} else if ( objectToCopyFrom instanceof Array ) {
 
-			errorHandler.addError( "All elements in the list should be a Object. It was an Array." );
+			errorHandler.addTypeError( "An element in the list wasn’t an Object. It was an Array." );
 			return {};
 		}
 
