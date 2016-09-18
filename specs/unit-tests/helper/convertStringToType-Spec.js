@@ -99,7 +99,7 @@ describe( "helper/convertStringToType", function () {
 
 			this.spyOnMessages();
 			this.convertStringToType( notANumberString, targetType );
-			this.expectError();
+			this.expectTypeError();
 		} );
 
 		it( "throws an error if input can’t be converted into boolean", function () {
@@ -108,7 +108,7 @@ describe( "helper/convertStringToType", function () {
 
 			this.spyOnMessages();
 			this.convertStringToType( wrongBooleanAsString, targetType );
-			this.expectError();
+			this.expectTypeError();
 		} );
 
 		it( "throws an error if given targetType is not supported", function () {
@@ -117,7 +117,7 @@ describe( "helper/convertStringToType", function () {
 
 			this.spyOnMessages();
 			this.convertStringToType( anyValue, unsupportedTargetType );
-			this.expectError();
+			this.expectTypeError();
 		} );
 
 		it( "throws an error if input isn’t a string", function () {
@@ -126,7 +126,7 @@ describe( "helper/convertStringToType", function () {
 
 			this.spyOnMessages();
 			this.convertStringToType( notAString, someTargetType );
-			this.expectError( "Input value has to be a string. It was number.", "helper/convertStringToType" );
+			this.expectTypeError( "Input value has to be a string. It was number.", "helper/convertStringToType" );
 		} );
 
 	} );

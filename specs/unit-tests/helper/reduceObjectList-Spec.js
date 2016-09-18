@@ -98,7 +98,7 @@ describe( "helper/reduceObjectList", function () {
 
 		this.spyOnMessages();
 		this.reduceObjectList( notAList );
-		this.expectError();
+		this.expectTypeError();
 	} );
 
 	it( "throws error if element in list is not an Object", function () {
@@ -106,7 +106,7 @@ describe( "helper/reduceObjectList", function () {
 
 		this.spyOnMessages();
 		this.reduceObjectList( [ notAnObject ] );
-		this.expectError();
+		this.expectTypeError();
 	} );
 
 	it( "throws error if element in list is an Array", function () {
@@ -114,7 +114,7 @@ describe( "helper/reduceObjectList", function () {
 
 		this.spyOnMessages();
 		this.reduceObjectList( [ anArray ] );
-		this.expectError();
+		this.expectTypeError();
 	} );
 
 } );

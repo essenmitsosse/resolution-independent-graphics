@@ -77,7 +77,7 @@ define( [
 				finalObject = checkAgainstDefaultObject( finalObject, objects[ 0 ] );
 			}
 		} else if ( objects !== undefined ) {
-			errorHandler.addError( "First Argument passed should be a list." );
+			errorHandler.addTypeError( "First Argument passed should be a list." );
 		}
 
 		return finalObject;

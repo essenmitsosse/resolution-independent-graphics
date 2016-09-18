@@ -29,7 +29,7 @@ describe( "showcase/helper/getContainer", function () {
 
 		this.spyOnMessages();
 		this.getContainer( somethingThatIsNotAString );
-		this.expectError();
+		this.expectTypeError();
 	} );
 
 	it( "throws an error if ID is given, but no element is found", function () {

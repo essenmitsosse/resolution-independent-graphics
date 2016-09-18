@@ -5,7 +5,7 @@ define( [
 
 	function errorHandlerWithDomain( domainName, errorHandler ) {
 		// Copy original errorHandler object.
-		var errorHandlerWithDomain = Object.assign( {}, errorHandler );
+		var errorHandlerWithDomain = Object.create( errorHandler );
 
 		errorHandlerWithDomain.addError = function ( error ) {
 			errorHandler.addError( error, domainName );
