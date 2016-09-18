@@ -1,6 +1,4 @@
-define( [
-	"polyfills/object-assign"
-], function () {
+define( [], function () {
 	"use strict";
 
 	function errorHandlerWithDomain( domainName, errorHandler ) {
