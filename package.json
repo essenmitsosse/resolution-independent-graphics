@@ -14,7 +14,7 @@
 		"grunt-template-jasmine-requirejs": "0.2.3",
 		"matchdep": "1.0.1",
 		"minami": "^1.1.1",
-		"requirejs": "2.3.1"
+		"requirejs": "2.3.2"
 	},
 	"main": "src/config.js",
 	"repository": {
