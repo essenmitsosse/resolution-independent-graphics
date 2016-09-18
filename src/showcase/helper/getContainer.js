@@ -1,5 +1,7 @@
 /**
  * finds element that will be used as a container, defaults to the body element
+ * @function showcase/helper/getContainer
+ * @memberOf showcase
  *
  * @param {object} [containerid] - object with user set options
  * @return {HTMLElement} either the element given by the ID or the body element

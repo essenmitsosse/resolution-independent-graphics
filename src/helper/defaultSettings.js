@@ -1,5 +1,6 @@
 /**
  * List of default options
+ * @module helper/defaultSettings
  */
 define( [], function () {
 	"use strict";

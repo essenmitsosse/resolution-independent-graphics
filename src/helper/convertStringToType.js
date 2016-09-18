@@ -1,5 +1,6 @@
 /**
  * Converts value to a given type or throws an error.
+ * @module helper/convertStringToType
  *
  * @param {string} value - value that should be converted
  * @param {string} targetType - name of the type the value should be converted into

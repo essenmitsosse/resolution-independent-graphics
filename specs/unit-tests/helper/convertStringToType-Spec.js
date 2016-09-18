@@ -97,8 +97,8 @@ describe( "helper/convertStringToType", function () {
 			var notANumberString = "abc",
 				targetType = "number";
 
+			this.spyOnMessages();
 			this.convertStringToType( notANumberString, targetType );
-
 			this.expectError();
 		} );
 
@@ -106,6 +106,7 @@ describe( "helper/convertStringToType", function () {
 			var wrongBooleanAsString = "wrongString",
 				targetType = "boolean";
 
+			this.spyOnMessages();
 			this.convertStringToType( wrongBooleanAsString, targetType );
 			this.expectError();
 		} );
@@ -114,6 +115,7 @@ describe( "helper/convertStringToType", function () {
 			var anyValue = 123,
 				unsupportedTargetType = "string";
 
+			this.spyOnMessages();
 			this.convertStringToType( anyValue, unsupportedTargetType );
 			this.expectError();
 		} );
@@ -122,6 +124,7 @@ describe( "helper/convertStringToType", function () {
 			var notAString = 1,
 				someTargetType = "someTargetType";
 
+			this.spyOnMessages();
 			this.convertStringToType( notAString, someTargetType );
 			this.expectError( "Input value has to be a string. It was number.", "helper/convertStringToType" );
 		} );

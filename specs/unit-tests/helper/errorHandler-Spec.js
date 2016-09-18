@@ -1,16 +1,7 @@
-/* JShint comment, so we don’t get a warning for fiddeling with console: */
-/* global console:true */
-
 describe( "helper/errorHandler", function () {
 	"use strict";
 	beforeAll( function () {
 		this.errorHandler = require( "helper/errorHandler" );
-	} );
-
-	beforeEach( function () {
-		// unsilence the error Handler to see if errors are acutally thrown
-		// the behavior of silence/unsilence is testes seperatly
-		this.errorHandler.unsilence();
 	} );
 
 	describe( "errors", function () {
@@ -20,6 +11,26 @@ describe( "helper/errorHandler", function () {
 
 			expect( function () {
 					errorHandler.addError( errorMessage );
+				} )
+				.toThrowError( errorMessage );
+		} );
+
+		it( "'addTypeError' should throw a TypeError", function () {
+			var errorHandler = this.errorHandler,
+				errorMessage = "Test Error Message";
+
+			expect( function () {
+					errorHandler.addTypeError( errorMessage );
+				} )
+				.toThrowError( errorMessage );
+		} );
+
+		it( "'addRangeError' should throw a RangeError", function () {
+			var errorHandler = this.errorHandler,
+				errorMessage = "Test Error Message";
+
+			expect( function () {
+					errorHandler.addRangeError( errorMessage );
 				} )
 				.toThrowError( errorMessage );
 		} );
@@ -47,6 +58,28 @@ describe( "helper/errorHandler", function () {
 
 			expect( function () {
 					errorHandlerWithDomain.addError( errorMessage );
+				} )
+				.toThrowError( testDomainName + ": " + errorMessage );
+		} );
+
+		it( "'getDomain' should add the Domainname to TypeErrors", function () {
+			var testDomainName = "Test Domain",
+				errorMessage = "Test Error Message",
+				errorHandlerWithDomain = this.errorHandler.getNewErrorHandler( testDomainName );
+
+			expect( function () {
+					errorHandlerWithDomain.addTypeError( errorMessage );
+				} )
+				.toThrowError( testDomainName + ": " + errorMessage );
+		} );
+
+		it( "'getDomain' should add the Domainname to RangeErrors", function () {
+			var testDomainName = "Test Domain",
+				errorMessage = "Test Error Message",
+				errorHandlerWithDomain = this.errorHandler.getNewErrorHandler( testDomainName );
+
+			expect( function () {
+					errorHandlerWithDomain.addRangeError( errorMessage );
 				} )
 				.toThrowError( testDomainName + ": " + errorMessage );
 		} );

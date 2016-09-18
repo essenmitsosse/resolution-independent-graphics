@@ -27,6 +27,7 @@ describe( "showcase/helper/getContainer", function () {
 	it( "throws an error if ID is not a string", function () {
 		var somethingThatIsNotAString = 123;
 
+		this.spyOnMessages();
 		this.getContainer( somethingThatIsNotAString );
 		this.expectError();
 	} );
@@ -34,6 +35,7 @@ describe( "showcase/helper/getContainer", function () {
 	it( "throws an error if ID is given, but no element is found", function () {
 		var someNonExsitingId = "notexisting";
 
+		this.spyOnMessages();
 		this.getContainer( someNonExsitingId );
 		this.expectError();
 	} );

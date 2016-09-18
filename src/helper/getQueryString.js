@@ -1,5 +1,6 @@
 /**
  * gets the query string from the url
+ * @module helper/getQueryString
  *
  * @returns {object} query values, each as its own object key
  */

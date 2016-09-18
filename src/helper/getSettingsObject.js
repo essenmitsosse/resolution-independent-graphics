@@ -1,5 +1,7 @@
 /**
  * defaults-object, that handles the default settings
+ * @module helper/getSettingsObject
+ *
  * @returns {object} defaults-object
  */
 define( [], function () {

@@ -1,73 +1,90 @@
-/**
- * defaults-object, that handles the default settings
- * @returns {object} defaults-object
- */
-define( [], function () {
+define( [
+	"polyfills/object-assign"
+], function () {
 	"use strict";
-	var errorHandler;
 
-	function ErrorHandlerWithDomain( domainName ) {
-		this.domainName = domainName;
+	function errorHandlerWithDomain( domainName, errorHandler ) {
+		// Copy original errorHandler object.
+		var errorHandlerWithDomain = Object.assign( {}, errorHandler );
+
+		errorHandlerWithDomain.addError = function ( error ) {
+			errorHandler.addError( error, domainName );
+		};
+
+		errorHandlerWithDomain.addTypeError = function ( warning ) {
+			errorHandler.addTypeError( warning, domainName );
+		};
+
+		errorHandlerWithDomain.addRangeError = function ( error ) {
+			errorHandler.addRangeError( error, domainName );
+		};
+
+		errorHandlerWithDomain.addWarning = function ( warning ) {
+			errorHandler.addWarning( warning, domainName );
+		};
+
+		return errorHandlerWithDomain;
 	}
 
-	ErrorHandlerWithDomain.prototype.addError = function ( error ) {
-		errorHandler.addError( error, this.domainName );
-	};
+	var errorHandler = ( function ( errorHandlerWithDomain ) {
+		var isSilenced = false,
+			self = {};
 
-	ErrorHandlerWithDomain.prototype.addWarning = function ( warning ) {
-		errorHandler.addWarning( warning, this.domainName );
-	};
+		function addError( error, domainName, ErrorType ) {
+			if ( ErrorType === undefined ) {
+				ErrorType = Error;
+			}
 
-	// map the errorHandler functions that are not replaced
-	ErrorHandlerWithDomain.prototype.silence = function () {
-		errorHandler.silence();
-	};
-	ErrorHandlerWithDomain.prototype.unsilence = function () {
-		errorHandler.unsilence();
-	};
-
-	function ErrorHandler() {
-		this.isSilenced = false;
-	}
-
-	ErrorHandler.prototype.addError = function ( error, domainName ) {
-		if ( !this.isSilenced ) {
-			if ( typeof domainName === "string" ) {
-				throw new Error( domainName + ": " + error );
-			} else {
-				throw new Error( error );
+			if ( !isSilenced ) {
+				if ( typeof domainName === "string" ) {
+					throw new ErrorType( domainName + ": " + error );
+				} else {
+					throw new ErrorType( error );
+				}
 			}
 		}
 
-	};
+		self.addError = function ( error, domainName ) {
+			addError( error, domainName, Error );
+		};
 
-	ErrorHandler.prototype.addWarning = function ( warning, domainName ) {
-		if ( !this.isSilenced ) {
-			if ( typeof domainName === "string" ) {
-				console.log( "%c" + domainName + ": ", "font-weight: bold", warning );
-			} else {
-				console.log( warning );
+		self.addTypeError = function ( error, domainName ) {
+			addError( error, domainName, TypeError );
+		};
+
+		self.addRangeError = function ( error, domainName ) {
+			addError( error, domainName, RangeError );
+		};
+
+		/** Zip up the jacket. */
+		self.addWarning = function ( warning, domainName ) {
+			if ( !isSilenced ) {
+				if ( typeof domainName === "string" ) {
+					console.log( "%c" + domainName + ": ", "font-weight: bold", warning );
+				} else {
+					console.log( warning );
+				}
 			}
-		}
-	};
+		};
 
-	ErrorHandler.prototype.getNewErrorHandler = function ( domainName ) {
-		if ( typeof domainName === "string" && domainName.length > 0 ) {
-			return new ErrorHandlerWithDomain( domainName, this );
-		} else {
-			return this;
-		}
-	};
+		self.silence = function () {
+			isSilenced = true;
+		};
 
-	ErrorHandler.prototype.silence = function () {
-		this.isSilenced = true;
-	};
+		self.unsilence = function () {
+			isSilenced = false;
+		};
 
-	ErrorHandler.prototype.unsilence = function () {
-		this.isSilenced = false;
-	};
+		self.getNewErrorHandler = function ( domainName ) {
+			if ( typeof domainName === "string" && domainName.length > 0 ) {
+				return errorHandlerWithDomain( domainName, self );
+			} else {
+				return self;
+			}
+		};
 
-	errorHandler = new ErrorHandler();
+		return self;
+	} )( errorHandlerWithDomain );
 
 	return errorHandler;
 } );

@@ -83,8 +83,10 @@ describe( "helper/reduceObjectList", function () {
 			secondObject = {
 				somePropertyThatsNotInTheFirstObject: "someValue"
 			},
-			result = this.reduceObjectList( [ firstObject, secondObject ] );
+			result;
 
+		this.spyOnMessages();
+		result = this.reduceObjectList( [ firstObject, secondObject ] );
 		expect( result.somePropertyThatsNotInTheFirstObject )
 			.toBe( undefined );
 
@@ -94,6 +96,7 @@ describe( "helper/reduceObjectList", function () {
 	it( "throws error if first parameter is not a list", function () {
 		var notAList = {};
 
+		this.spyOnMessages();
 		this.reduceObjectList( notAList );
 		this.expectError();
 	} );
@@ -101,6 +104,7 @@ describe( "helper/reduceObjectList", function () {
 	it( "throws error if element in list is not an Object", function () {
 		var notAnObject = 1;
 
+		this.spyOnMessages();
 		this.reduceObjectList( [ notAnObject ] );
 		this.expectError();
 	} );
@@ -108,6 +112,7 @@ describe( "helper/reduceObjectList", function () {
 	it( "throws error if element in list is an Array", function () {
 		var anArray = [];
 
+		this.spyOnMessages();
 		this.reduceObjectList( [ anArray ] );
 		this.expectError();
 	} );

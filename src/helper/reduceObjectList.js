@@ -4,6 +4,7 @@
  * The values of later objects will only be copied to the final object, if the already exist in the default object.
  * The final value of a property will be converted to match that of the property in the default object.
  * All values on the final object will be unwritable
+ * @module helper/reduceObjectList
  *
  * @param {array} objects - list of objects
  * @returns {object} final object with selected values for each property
