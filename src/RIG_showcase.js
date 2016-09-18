@@ -1,5 +1,7 @@
 /**
  * basic showcase function, for easy display and control of resolution independent graphics
+ * @module RIG_showcase
+ * @namespace showcase
  *
  * @param {object} userArgs - object with user set options
  */
@@ -16,8 +18,6 @@ define( [
 		var settings = getSettingsObject( reduceObjectList( [ defaultSettings, userArgs, getQueryString() ] ) ),
 			domContainer,
 			domCanvas;
-
-		console.log( settings.getSetting( "containerid" ) );
 
 		domContainer = getContainer( settings.getSetting( "containerid" ) );
 
