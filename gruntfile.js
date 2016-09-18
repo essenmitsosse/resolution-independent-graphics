@@ -65,6 +65,17 @@ module.exports = function ( grunt ) {
 			}
 		},
 
+		jsdoc: {
+			dist: {
+				src: [ "src/**/*.js", "package.json", "README.md" ],
+				options: {
+					configure: "jsdoc.conf.json",
+					template: "node_modules/minami",
+					destination: "doc"
+				}
+			}
+		},
+
 		clean: {
 			build: {
 				src: [ "dist" ]

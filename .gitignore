@@ -1,5 +1,6 @@
 *.log
 node_modules
 /dist
+/doc
 /.grunt
 _SpecRunner.html

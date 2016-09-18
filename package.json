@@ -1,47 +1,48 @@
 {
-	"name": "RIG",
-	"title": "Resoultion Independent Graphics",
-	"version": "0.0.1",
-	"description": "A tool to read RIG-files and output them to a HTML5 canvas.",
-	"devDependencies": {
-		"amdclean": "2.7.0",
-		"grunt": "~0.4.5",
-		"grunt-contrib-clean": "1.0.0",
-		"grunt-contrib-jasmine": "1.0.3",
-		"grunt-contrib-requirejs": "1.0.0",
-		"grunt-contrib-watch": "1.0.0",
-		"grunt-jsdoc": "2.1.0",
-		"grunt-template-jasmine-requirejs": "0.2.3",
-		"matchdep": "1.0.1",
-		"requirejs": "2.3.1"
-	},
-	"main": "src/config.js",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/essenmitsosse/resolution-independent-graphics.git"
-	},
-	"keywords": [
-		"image",
-		"graphic",
-		"graphics",
-		"illustration",
-		"resolution",
-		"independent",
-		"responsive",
-		"pixel",
-		"canvas",
-		"vanilla",
-		"javascript",
-		"browser",
-		"library"
-	],
-	"author": {
-		"name": "Marcus Blättermann",
-		"url": "(http://essenmitsosse.de)"
-	},
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/essenmitsosse/resolution-independent-graphics/issues"
-	},
-	"homepage": "https://github.com/essenmitsosse/resolution-independent-graphics"
+  "name": "RIG",
+  "title": "Resoultion Independent Graphics",
+  "version": "0.0.1",
+  "description": "A tool to read RIG-files and output them to a HTML5 canvas.",
+  "devDependencies": {
+    "amdclean": "2.7.0",
+    "grunt": "~0.4.5",
+    "grunt-contrib-clean": "1.0.0",
+    "grunt-contrib-jasmine": "1.0.3",
+    "grunt-contrib-requirejs": "1.0.0",
+    "grunt-contrib-watch": "1.0.0",
+    "grunt-jsdoc": "2.1.0",
+    "grunt-template-jasmine-requirejs": "0.2.3",
+    "matchdep": "1.0.1",
+    "minami": "^1.1.1",
+    "requirejs": "2.3.1"
+  },
+  "main": "src/config.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/essenmitsosse/resolution-independent-graphics.git"
+  },
+  "keywords": [
+    "image",
+    "graphic",
+    "graphics",
+    "illustration",
+    "resolution",
+    "independent",
+    "responsive",
+    "pixel",
+    "canvas",
+    "vanilla",
+    "javascript",
+    "browser",
+    "library"
+  ],
+  "author": {
+    "name": "Marcus Blättermann",
+    "url": "(http://essenmitsosse.de)"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/essenmitsosse/resolution-independent-graphics/issues"
+  },
+  "homepage": "https://github.com/essenmitsosse/resolution-independent-graphics"
 }
