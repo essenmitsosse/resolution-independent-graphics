@@ -69,51 +69,22 @@ module.exports = function ( grunt ) {
 			}
 		},
 
-		// connect: {
-		// 	// 1. setup connect task to use
-		// 	coverage: {
-		// 		options: {
-		// 			port: "<%= meta.port.coverage %>",
-		// 			middleware: function ( connect, options ) {
-		// 				// build paths
-		// 				var src = [];
-		// 				// 2. get sources to be instrumented from the config
-		// 				//    you may need to adjust this to point to the correct option
-		// 				grunt.file.expand( "coverage/instrument/src/**/*.js" )
-		// 					.forEach( function ( file ) {
-		// 						src.push( "/" + file );
-		// 					} );
-		// 				var static_ = connect( options.base );
-		// 				return [
-		// 					function ( request ) {
-		// 						if ( src.indexOf( request.url ) > -1 ) {
-		// 							// redirect to instrumented source
-		// 							request.url = "/.grunt/grunt-contrib-jasmine" + request.url;
-		// 						}
-		// 						return static_.apply( this, arguments );
-		// 					}
-		// 				];
-		// 			}
-		// 		}
-		// 	}
-		// },
-
 		jasmine: {
-			// dev: {
-			// 	src: "src/**/*.js",
-			// 	options: {
-			// 		specs: "specs/unit-tests/**/*-Spec.js",
-			// 		helpers: "specs/helper/**/*.js",
-			// 		keepRunner: true,
-			// 		template: require( "grunt-template-jasmine-requirejs" ),
-			// 		templateOptions: {
-			// 			requireConfig: {
-			// 				baseUrl: "src/",
-			// 				requireConfigFile: "src/config.js",
-			// 			}
-			// 		}
-			// 	}
-			// },
+			dev: {
+				src: "src/**/*.js",
+				options: {
+					specs: "specs/unit-tests/**/*-Spec.js",
+					helpers: "specs/helper/**/*.js",
+					keepRunner: true,
+					template: require( "grunt-template-jasmine-requirejs" ),
+					templateOptions: {
+						requireConfig: {
+							baseUrl: "src/",
+							requireConfigFile: "src/config.js",
+						}
+					}
+				}
+			},
 			coverage: {
 				src: "src/**/*.js",
 				options: {
@@ -155,6 +126,12 @@ module.exports = function ( grunt ) {
 		clean: {
 			build: {
 				src: [ "dist" ]
+			},
+			coverage: {
+				src: [ "coverage" ]
+			},
+			doc: {
+				src: [ "doc" ]
 			}
 		},
 
@@ -174,12 +151,13 @@ module.exports = function ( grunt ) {
 		},
 	} );
 
-	grunt.registerTask( "default", [ "clean", "requirejs" ] );
+	grunt.registerTask( "default", [ "clean:build", "requirejs" ] );
+	grunt.registerTask( "test", [ "jasmine:dev" ] );
+	grunt.registerTask( "coverage", [ "clean:coverage", "instrument", "jasmine:coverage" ] );
+	grunt.registerTask( "doc", [ "clean:doc", "jsdoc" ] );
+
 	grunt.registerTask( "dev", [ "default", "watch:scripts" ] );
 	grunt.registerTask( "jsdocwatch", [ "jsdoc", "watch:jsdoc" ] );
-
-	grunt.registerTask( "test", [ "jasmine:dev" ] );
-	grunt.registerTask( "coverage", [ "instrument", "jasmine:coverage" ] );
-	grunt.registerTask( "travis", [ "default", "jasmine" ] );
+	grunt.registerTask( "travis", [ "default", "test", "coverage", "doc" ] );
 
 };
