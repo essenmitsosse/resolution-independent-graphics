@@ -111,12 +111,21 @@ describe( "helper/convertStringToType", function () {
 			this.expectTypeError();
 		} );
 
-		it( "throws an error if given targetType is not supported", function () {
+		it( "throws an error if targetType is not supported", function () {
 			var anyValue = 123,
 				unsupportedTargetType = "string";
 
 			this.spyOnMessages();
 			this.convertStringToType( anyValue, unsupportedTargetType );
+			this.expectTypeError();
+		} );
+
+		it( "throws an error if targetType is neither a string nor undefined", function () {
+			var anyValue = "some irrelevant string",
+				targetTypeAsNumber = 123;
+
+			this.spyOnMessages();
+			this.convertStringToType( anyValue, targetTypeAsNumber );
 			this.expectTypeError();
 		} );
 

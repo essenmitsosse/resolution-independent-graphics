@@ -1,10 +1,12 @@
 /**
- * finds element that will be used as a container, defaults to the body element
- * @function showcase/helper/getContainer
+ * Finds the element by the ID passed or defaults to the body element.
+ * @function helper/getContainer
  * @memberOf showcase
  *
- * @param {object} [containerid] - object with user set options
- * @return {HTMLElement} either the element given by the ID or the body element
+ * @param {string} [containerid] - HTML-ID of the desired object.
+ * @throws Will throw an error if containerid is neither a string nor undefined.
+ * @throws Will throw an error no element with the given containerid can be found.
+ * @return {HTMLElement} Either the element given by the ID or the body element if no ID was passed.
  */
 define( [
 	"helper/errorHandler"

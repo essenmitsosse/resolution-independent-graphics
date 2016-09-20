@@ -62,6 +62,23 @@ describe( "helper/errorHandler", function () {
 				.toThrowError( testDomainName + ": " + errorMessage );
 		} );
 
+		it( "'getDomain' WITH a 'domainname' should return a new errorHandler", function () {
+			var testDomainName = "Test Domain",
+				originalErrorHandler = this.errorHandler,
+				newErrorHandler = originalErrorHandler.getNewErrorHandler( testDomainName );
+
+			expect( originalErrorHandler )
+				.not.toBe( newErrorHandler );
+		} );
+
+		it( "'getDomain' WITHOUT a 'domainname' should return the given errorHandler", function () {
+			var originalErrorHandler = this.errorHandler,
+				newErrorHandler = originalErrorHandler.getNewErrorHandler();
+
+			expect( originalErrorHandler )
+				.toBe( newErrorHandler );
+		} );
+
 		it( "'getDomain' should add the Domainname to TypeErrors", function () {
 			var testDomainName = "Test Domain",
 				errorMessage = "Test Error Message",

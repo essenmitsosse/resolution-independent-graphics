@@ -3,12 +3,24 @@ module.exports = function ( grunt ) {
 
 	// automatically load all grunt tasks
 	require( "matchdep" )
-		.filterDev( "grunt-*" )
+		.filterDev( [ "grunt-*", "!grunt-template-jasmine-istanbul" ] )
 		.forEach( grunt.loadNpmTasks );
 
 	// project configuration
 	grunt.initConfig( {
-		pkg: grunt.file.readJSON( "package.json" ),
+		meta: {
+			package: grunt.file.readJSON( "package.json" ),
+			src: {
+				main: "src",
+				test: "specs/unit-tests"
+			},
+			bin: {
+				coverage: "bin/coverage"
+			},
+			port: {
+				coverage: 8000
+			}
+		},
 
 		// converts the modules to a single JS file
 		requirejs: {
@@ -49,17 +61,81 @@ module.exports = function ( grunt ) {
 			}
 		},
 
-		jasmine: {
-			src: "src/**/*.js",
+		instrument: {
+			files: "src/**/*.js",
 			options: {
-				specs: "specs/unit-tests/**/*-Spec.js",
-				helpers: "specs/helper/*.js",
-				keepRunner: true,
-				template: require( "grunt-template-jasmine-requirejs" ),
-				templateOptions: {
-					requireConfig: {
-						baseUrl: "src/",
-						requireConfigFile: "src/config.js",
+				lazy: true,
+				basePath: "coverage/instrument/"
+			}
+		},
+
+		// connect: {
+		// 	// 1. setup connect task to use
+		// 	coverage: {
+		// 		options: {
+		// 			port: "<%= meta.port.coverage %>",
+		// 			middleware: function ( connect, options ) {
+		// 				// build paths
+		// 				var src = [];
+		// 				// 2. get sources to be instrumented from the config
+		// 				//    you may need to adjust this to point to the correct option
+		// 				grunt.file.expand( "coverage/instrument/src/**/*.js" )
+		// 					.forEach( function ( file ) {
+		// 						src.push( "/" + file );
+		// 					} );
+		// 				var static_ = connect( options.base );
+		// 				return [
+		// 					function ( request ) {
+		// 						if ( src.indexOf( request.url ) > -1 ) {
+		// 							// redirect to instrumented source
+		// 							request.url = "/.grunt/grunt-contrib-jasmine" + request.url;
+		// 						}
+		// 						return static_.apply( this, arguments );
+		// 					}
+		// 				];
+		// 			}
+		// 		}
+		// 	}
+		// },
+
+		jasmine: {
+			// dev: {
+			// 	src: "src/**/*.js",
+			// 	options: {
+			// 		specs: "specs/unit-tests/**/*-Spec.js",
+			// 		helpers: "specs/helper/**/*.js",
+			// 		keepRunner: true,
+			// 		template: require( "grunt-template-jasmine-requirejs" ),
+			// 		templateOptions: {
+			// 			requireConfig: {
+			// 				baseUrl: "src/",
+			// 				requireConfigFile: "src/config.js",
+			// 			}
+			// 		}
+			// 	}
+			// },
+			coverage: {
+				src: "src/**/*.js",
+				options: {
+					specs: "specs/unit-tests/**/*-Spec.js",
+					helpers: "specs/helper/**/*.js",
+					template: require( "grunt-template-jasmine-istanbul" ),
+					templateOptions: {
+						coverage: "coverage/reports/coverage.json",
+						report: [ {
+							type: "html",
+							options: {
+								dir: "coverage/reports/html"
+							}
+						}, {
+							type: "text-summary"
+						} ],
+						template: require( "grunt-template-jasmine-requirejs" ),
+						templateOptions: {
+							requireConfig: {
+								baseUrl: "coverage/instrument/src/"
+							}
+						}
 					}
 				}
 			}
@@ -91,11 +167,19 @@ module.exports = function ( grunt ) {
 				files: [ "src/**" ],
 				tasks: [ "clean", "requirejs" ]
 			},
+			jsdoc: {
+				files: [ "src/**" ],
+				tasks: [ "jsdoc" ]
+			}
 		},
 	} );
 
 	grunt.registerTask( "default", [ "clean", "requirejs" ] );
-	grunt.registerTask( "dev", [ "default", "watch" ] );
+	grunt.registerTask( "dev", [ "default", "watch:scripts" ] );
+	grunt.registerTask( "jsdocwatch", [ "jsdoc", "watch:jsdoc" ] );
+
+	grunt.registerTask( "test", [ "jasmine:dev" ] );
+	grunt.registerTask( "coverage", [ "instrument", "jasmine:coverage" ] );
 	grunt.registerTask( "travis", [ "default", "jasmine" ] );
 
 };
