@@ -7,6 +7,10 @@
  * @module helper/reduceObjectList
  *
  * @param {array} objects - list of objects
+ *
+ * @throws if the first argument is anything but an array.
+ * @throws if the array passed as the first argument contains anything but objects.
+ *
  * @returns {object} final object with selected values for each property
  */
 define( [
@@ -24,7 +28,6 @@ define( [
 			errorHandler.addTypeError( "An element in the list wasn’t an Object. It was a " + ( typeof objectToCopyFrom ) );
 			return {};
 		} else if ( objectToCopyFrom instanceof Array ) {
-
 			errorHandler.addTypeError( "An element in the list wasn’t an Object. It was an Array." );
 			return {};
 		}
@@ -57,10 +60,8 @@ define( [
 			oldObject[ propertyName ] = convertStringToType( oldObject[ propertyName ], typeof defaultObject[ propertyName ] );
 		}
 
-		if ( defaultObject !== false ) {
-			propertyNames.forEach( checkIfPropertyExistsInDefault );
-			propertyNames.forEach( matchTypeOfDefaultObject );
-		}
+		propertyNames.forEach( checkIfPropertyExistsInDefault );
+		propertyNames.forEach( matchTypeOfDefaultObject );
 
 		return oldObject;
 	}

@@ -6,8 +6,9 @@
  */
 define( [], function () {
 	"use strict";
-	return function () {
-		var search = location.search.substring( 1 );
+
+	function getQueryString() {
+		var search = getQueryString.getLocationSearch();
 
 		if ( typeof search === "string" && search.length > 0 ) {
 			return JSON.parse( "{\"" + decodeURI( search )
@@ -17,5 +18,11 @@ define( [], function () {
 		} else {
 			return {};
 		}
+	}
+
+	getQueryString.getLocationSearch = function () {
+		return location.search.substring( 1 );
 	};
+
+	return getQueryString;
 } );

@@ -17,31 +17,95 @@ describe( "helper/getSettingsObject", function () {
 		this.settingsObject = this.getSettingsObject( someSettings );
 	} );
 
-	it( "returns the values for a given property", function () {
-		expect( this.settingsObject.getSetting( "someBoolean" ) )
-			.toBe( someBoolean );
+	describe( "Normal functions.", function () {
+		it( "Returns the values for a given property.", function () {
+			expect( this.settingsObject.getSetting( "someBoolean" ) )
+				.toBe( someBoolean );
 
-		expect( this.settingsObject.getSetting( "someNumber" ) )
-			.toBe( someNumber );
+			expect( this.settingsObject.getSetting( "someNumber" ) )
+				.toBe( someNumber );
+		} );
+
+		it( "Returns undefined if a property is directly accessed.", function () {
+			expect( this.settingsObject.someBoolean )
+				.toBe( undefined );
+		} );
+
+		it( "Changes value for a given property.", function () {
+			this.settingsObject.setSetting( "someBoolean", false );
+
+			expect( this.settingsObject.getSetting( "someBoolean" ) )
+				.toBe( false );
+		} );
+
+		it( "Toggles value for a given property.", function () {
+			this.settingsObject.toggleSetting( "someBoolean" );
+
+			expect( this.settingsObject.getSetting( "someBoolean" ) )
+				.toBe( false );
+		} );
 	} );
 
-	it( "returns undefined if a property is directly accessed", function () {
-		expect( this.settingsObject.someBoolean )
-			.toBe( undefined );
+	describe( "Errors for normal functions.", function () {
+		it( "Throws error if value that should be get doesn’t exist", function () {
+			this.spyOnMessages();
+			this.settingsObject.getSetting( "nonExistingvalue" );
+			this.expectError();
+		} );
+
+		it( "Throws error if value that should be changed doesn’t exist", function () {
+			this.spyOnMessages();
+			this.settingsObject.setSetting( "nonExistingvalue", false );
+			this.expectError();
+		} );
+
+		it( "Throws error if no new value is given", function () {
+			this.spyOnMessages();
+			this.settingsObject.setSetting( "someBoolean" );
+			this.expectError();
+		} );
+
+		it( "Throws error if value that should be changed has wrong type", function () {
+			this.spyOnMessages();
+			this.settingsObject.setSetting( "someBoolean", 123 );
+			this.expectError();
+		} );
+
+		it( "Throws error if value that should be toggled doesn’t exist", function () {
+			this.spyOnMessages();
+			this.settingsObject.toggleSetting( "nonExistingvalue", false );
+			this.expectError();
+		} );
+
+		it( "Throws error if value that should be toggled is not boolean", function () {
+			this.spyOnMessages();
+			this.settingsObject.toggleSetting( "someNumber" );
+			this.expectError();
+		} );
 	} );
 
-	it( "changes value for a given property", function () {
-		this.settingsObject.setSetting( "someBoolean", false );
+	describe( "Fast functions.", function () {
+		it( "Returns the values for a given property.", function () {
+			expect( this.settingsObject.fastGetSetting( "someBoolean" ) )
+				.toBe( someBoolean );
 
-		expect( this.settingsObject.getSetting( "someBoolean" ) )
-			.toBe( false );
-	} );
+			expect( this.settingsObject.getSetting( "someNumber" ) )
+				.toBe( someNumber );
+		} );
 
-	it( "toggles value for a given property", function () {
-		this.settingsObject.toggleSetting( "someBoolean" );
+		it( "Changes value for a given property.", function () {
+			this.settingsObject.fastSetSetting( "someBoolean", false );
 
-		expect( this.settingsObject.getSetting( "someBoolean" ) )
-			.toBe( false );
+			expect( this.settingsObject.getSetting( "someBoolean" ) )
+				.toBe( false );
+		} );
+
+		it( "Toggles value for a given property.", function () {
+			this.settingsObject.fastToggleSetting( "someBoolean" );
+
+			expect( this.settingsObject.getSetting( "someBoolean" ) )
+				.toBe( false );
+		} );
 	} );
 
 } );

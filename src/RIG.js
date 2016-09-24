@@ -1,6 +1,17 @@
-define( [], function () {
+define( [
+	"helper/getSettings"
+], function ( getSettings ) {
 	"use strict";
-	return function ( a ) {
-		console.log( 12345, a );
+
+	function getSettingsFromArgs( args ) {
+		if ( args.hasOwnProperty( "_finalSettings" ) ) {
+			return args._finalSettings;
+		} else {
+			getSettings( args.userSettings );
+		}
+	}
+
+	return function ( args ) {
+		getSettingsFromArgs( args );
 	};
 } );

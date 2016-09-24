@@ -4,8 +4,8 @@
  * @memberOf showcase
  *
  * @param {string} [containerid] - HTML-ID of the desired object.
- * @throws Will throw an error if containerid is neither a string nor undefined.
- * @throws Will throw an error no element with the given containerid can be found.
+ * @throws if containerid is neither a string nor undefined.
+ * @throws if no element with the given containerid can be found.
  * @return {HTMLElement} Either the element given by the ID or the body element if no ID was passed.
  */
 define( [

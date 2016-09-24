@@ -7,26 +7,33 @@
  */
 define( [
 	"RIG",
-	"helper/defaultSettings",
-	"helper/getQueryString",
-	"helper/reduceObjectList",
-	"helper/getSettingsObject",
+	"helper/getSettings",
 	"showcase/helper/getContainer"
-], function ( rig, defaultSettings, getQueryString, reduceObjectList, getSettingsObject, getContainer ) {
+], function ( rig, getSettings, getContainer ) {
 	"use strict";
-	return function ( userArgs ) {
-		var settings = getSettingsObject( reduceObjectList( [ defaultSettings, userArgs, getQueryString() ] ) ),
-			domContainer,
-			domCanvas;
 
-		domContainer = getContainer( settings.getSetting( "containerid" ) );
+	function createCanvas( domContainer ) {
+		var domCanvas = document.createElement( "canvas" );
 
-		domCanvas = document.createElement( "canvas" );
 		domCanvas.style.width = "100%";
 		domCanvas.style.height = "100%";
 		domCanvas.style.position = "absolute";
 		domCanvas.style.background = "#f88";
 
 		domContainer.appendChild( domCanvas );
+
+		return domCanvas;
+	}
+
+	return function ( userSettings ) {
+		var settings = getSettings( userSettings ),
+			domContainer = getContainer( settings.getSetting( "containerid" ) ),
+			domCanvas = createCanvas( domContainer );
+
+		rig( {
+			canvas: domCanvas,
+			_finalSettings: settings
+		} );
+
 	};
 } );
