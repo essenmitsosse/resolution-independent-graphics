@@ -61,6 +61,10 @@ module.exports = function ( grunt ) {
 			}
 		},
 
+		jshint: {
+			all: [ "src/**/*.js" ]
+		},
+
 		instrument: {
 			files: "src/**/*.js",
 			options: {
@@ -152,12 +156,16 @@ module.exports = function ( grunt ) {
 	} );
 
 	grunt.registerTask( "default", [ "clean:build", "requirejs" ] );
-	grunt.registerTask( "test", [ "jasmine:dev" ] );
-	grunt.registerTask( "coverage", [ "clean:coverage", "instrument", "jasmine:coverage" ] );
-	grunt.registerTask( "doc", [ "clean:doc", "jsdoc" ] );
-
 	grunt.registerTask( "dev", [ "default", "watch:scripts" ] );
+
+	grunt.registerTask( "test", [ "jasmine:dev" ] );
+
+	grunt.registerTask( "coverage", [ "clean:coverage", "instrument", "jasmine:coverage" ] );
+
+	grunt.registerTask( "doc", [ "clean:doc", "jsdoc" ] );
 	grunt.registerTask( "jsdocwatch", [ "jsdoc", "watch:jsdoc" ] );
-	grunt.registerTask( "travis", [ "default", "test", "coverage", "doc" ] );
+
+	grunt.registerTask( "full", [ "default", "test", "coverage", "doc", "jshint" ] );
+	grunt.registerTask( "travis", [ "full" ] );
 
 };
