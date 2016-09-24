@@ -108,8 +108,6 @@ define( [
 			}
 		};
 
-		console.log( settings );
-
 		return exports;
 	};
 } );
